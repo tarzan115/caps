@@ -5,6 +5,8 @@ SetCapsLockState "AlwaysOff"
 global appCycle := Map()
 global lastKey := ""
 global visualMode := false
+global keyBuffer := ""
+global bufferTimer := 0
 
 CapsLock::
 {
@@ -21,7 +23,18 @@ CapsLock & v:: {
     global visualMode
     visualMode := !visualMode
     ToolTip visualMode ? "Visual Mode ON" : "Visual Mode OFF"
-    SetTimer () => ToolTip(), -1000 ; Hide tooltip after 1 second
+    SetTimer(() => ToolTip(), -1000) ; Hide tooltip after 1 second
+
+    if (visualMode) {
+        SetTimer(TurnOffVisualMode, -10000) ; Turn off after 10 seconds
+    }
+}
+
+TurnOffVisualMode() {
+    global visualMode
+    visualMode := false
+    ToolTip("Visual Mode OFF")
+    SetTimer(() => ToolTip(), -1000)
 }
 
 ; Navigation keys with optional Shift for selection
@@ -59,10 +72,36 @@ CapsLock & l:: {
 
 ; Home and End navigation with Visual Mode
 CapsLock & h:: {
-    Send(visualMode ? "+{Home}" : "{Home}") ; Select or move to beginning of line
+    HandleSequence("h")
+    if (keyBuffer != "hh") {
+        Send(visualMode ? "+{Home}" : "{Home}")
+    }
 }
+
 CapsLock & o:: {
-    Send(visualMode ? "+{End}" : "{End}") ; Select or move to end of line
+    HandleSequence("o")
+    if (keyBuffer != "oo") {
+        Send(visualMode ? "+{End}" : "{End}")
+    }
+}
+
+HandleSequence(key) {
+    global keyBuffer, bufferTimer
+    keyBuffer .= key
+    SetTimer(ClearBuffer, -500) ; Clear buffer after 500ms
+
+    if (keyBuffer = "oo") {
+        keyBuffer := ""
+        Send(visualMode ? "+^{End}" : "^{End}") ; Correct: Ctrl + End
+    } else if (keyBuffer = "hh") {
+        keyBuffer := ""
+        Send(visualMode ? "+^{Home}" : "^{Home}") ; Correct: Ctrl + Home
+    }
+}
+
+ClearBuffer() {
+    global keyBuffer
+    keyBuffer := ""
 }
 
 ; go back and go forward
@@ -85,7 +124,6 @@ CapsLock & x:: Send("{0}")
 CapsLock & Space:: Send("{Enter}")
 
 ; rcmd clone
-
 RAlt & a:: CycleApp("a")
 RAlt & b:: CycleApp("b")
 RAlt & c:: CycleApp("c")

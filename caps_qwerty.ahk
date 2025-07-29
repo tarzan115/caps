@@ -1,3 +1,4 @@
+caps/caps_qwerty.ahk
 #Requires AutoHotkey v2.0
 
 ; QWERTY-friendly version of caps.ahk
@@ -9,6 +10,8 @@ SetCapsLockState "AlwaysOff"
 global appCycle := Map()
 global lastKey := ""
 global visualMode := false
+global keyBuffer := ""
+global bufferTimer := 0
 
 CapsLock::
 {
@@ -20,12 +23,23 @@ CapsLock::
 }
 return
 
-; Toggle Visual Mode with CapsLock + v
+; Toggle Visual Mode with CapsLock + v (auto-off after 10s)
 CapsLock & v:: {
     global visualMode
     visualMode := !visualMode
     ToolTip visualMode ? "Visual Mode ON" : "Visual Mode OFF"
-    SetTimer () => ToolTip(), -1000
+    SetTimer(() => ToolTip(), -1000) ; Hide tooltip after 1 second
+
+    if (visualMode) {
+        SetTimer(TurnOffVisualMode, -10000) ; Turn off after 10 seconds
+    }
+}
+
+TurnOffVisualMode() {
+    global visualMode
+    visualMode := false
+    ToolTip("Visual Mode OFF")
+    SetTimer(() => ToolTip(), -1000)
 }
 
 ; Navigation keys with optional Shift for selection
@@ -63,13 +77,38 @@ CapsLock & u:: {
     Send(visualMode ? "+^{Left}" : "^{Left}")
 }
 
-; Home and End navigation with Visual Mode
+; Home and End navigation with Visual Mode and double-tap for Ctrl+Home/End
 ; QWERTY: h = Home, ; = End
 CapsLock & h:: {
-    Send(visualMode ? "+{Home}" : "{Home}")
+    HandleSequence("h")
+    if (keyBuffer != "hh") {
+        Send(visualMode ? "+{Home}" : "{Home}")
+    }
 }
 CapsLock & `;:: {
-    Send(visualMode ? "+{End}" : "{End}")
+    HandleSequence(";")
+    if (keyBuffer != ";;") {
+        Send(visualMode ? "+{End}" : "{End}")
+    }
+}
+
+HandleSequence(key) {
+    global keyBuffer, bufferTimer
+    keyBuffer .= key
+    SetTimer(ClearBuffer, -500) ; Clear buffer after 500ms
+
+    if (keyBuffer = ";;") {
+        keyBuffer := ""
+        Send(visualMode ? "+^{End}" : "^{End}") ; Ctrl+End
+    } else if (keyBuffer = "hh") {
+        keyBuffer := ""
+        Send(visualMode ? "+^{Home}" : "^{Home}") ; Ctrl+Home
+    }
+}
+
+ClearBuffer() {
+    global keyBuffer
+    keyBuffer := ""
 }
 
 ; go back and go forward

@@ -29,11 +29,12 @@ Supercharge your CapsLock: lightning-fast navigation, selection, and app switchi
 
 - **CapsLock Remapping**: CapsLock key is always off and repurposed for navigation and shortcuts.
 - **Backspace Shortcut**: Tap CapsLock to send Backspace.
-- **Visual Mode**: Toggle with CapsLock + v. Enables selection with navigation keys.
+- **Visual Mode**: Toggle with CapsLock + v. Enables selection with navigation keys. _Automatically turns off after 10 seconds of inactivity._
 - **Navigation**:
   - CapsLock + n/i/u/e: Move Left/Right/Up/Down (with selection in Visual Mode)
   - CapsLock + y/l: Move to next/previous word (with selection in Visual Mode)
   - CapsLock + h/o: Move to beginning/end of line (with selection in Visual Mode)
+    - _Double-tap h or o for Ctrl+Home or Ctrl+End (with selection in Visual Mode)_
   - CapsLock + j/k: Page Up/Page Down
   - CapsLock + Space: Enter
 - **Scrolling (with Shift)**:
@@ -52,11 +53,12 @@ Supercharge your CapsLock: lightning-fast navigation, selection, and app switchi
 
 - **CapsLock Remapping**: CapsLock key is always off and repurposed for navigation and shortcuts.
 - **Backspace Shortcut**: Tap CapsLock to send Backspace.
-- **Visual Mode**: Toggle with CapsLock + v. Enables selection with navigation keys.
+- **Visual Mode**: Toggle with CapsLock + v. Enables selection with navigation keys. _Automatically turns off after 10 seconds of inactivity._
 - **Navigation**:
   - CapsLock + j/l/i/k: Move Left/Right/Up/Down (with selection in Visual Mode)
   - CapsLock + o/u: Move to next/previous word (with selection in Visual Mode)
   - CapsLock + h/;: Move to beginning/end of line (with selection in Visual Mode)
+    - _Double-tap h or ; for Ctrl+Home or Ctrl+End (with selection in Visual Mode)_
   - CapsLock + p/n: Page Up/Page Down
   - CapsLock + Space: Enter
 - **Scrolling (with Shift)**:
@@ -83,6 +85,7 @@ Supercharge your CapsLock: lightning-fast navigation, selection, and app switchi
 | Shift + CapsLock + n/i/u/e | Scroll Left/Right/Up/Down     |
 | CapsLock + y/l             | Next/Previous Word            |
 | CapsLock + h/o             | Home/End                      |
+| CapsLock + hh/oo           | Ctrl+Home/Ctrl+End            |
 | CapsLock + j/k             | Page Up/Page Down             |
 | CapsLock + m               | Ctrl+Backspace (delete word)  |
 | Ctrl + CapsLock            | Ctrl+Backspace (delete word)  |
@@ -102,6 +105,7 @@ Supercharge your CapsLock: lightning-fast navigation, selection, and app switchi
 | Shift + CapsLock + j/l/i/k | Scroll Left/Right/Up/Down     |
 | CapsLock + o/u             | Next/Previous Word            |
 | CapsLock + h/;             | Home/End                      |
+| CapsLock + hh/;;           | Ctrl+Home/Ctrl+End            |
 | CapsLock + p/n             | Page Up/Page Down             |
 | CapsLock + m               | Ctrl+Backspace (delete word)  |
 | Ctrl + CapsLock            | Ctrl+Backspace (delete word)  |
