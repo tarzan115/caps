@@ -29,7 +29,7 @@ Supercharge your CapsLock: lightning-fast navigation, selection, and app switchi
 
 - **CapsLock Remapping**: CapsLock key is always off and repurposed for navigation and shortcuts.
 - **Backspace Shortcut**: Tap CapsLock to send Backspace.
-- **Visual Mode**: Toggle with CapsLock + v. Enables selection with navigation keys. _Automatically turns off after 10 seconds of inactivity._
+- **Visual Mode**: Toggle with CapsLock + v. Enables selection with navigation keys. _Automatically turns off after 15 minutes of inactivity._
 - **Navigation**:
   - CapsLock + n/i/u/e: Move Left/Right/Up/Down (with selection in Visual Mode)
   - CapsLock + t + u/e: Move 5 steps Up/Down (with selection in Visual Mode)
@@ -54,7 +54,7 @@ Supercharge your CapsLock: lightning-fast navigation, selection, and app switchi
 
 - **CapsLock Remapping**: CapsLock key is always off and repurposed for navigation and shortcuts.
 - **Backspace Shortcut**: Tap CapsLock to send Backspace.
-- **Visual Mode**: Toggle with CapsLock + v. Enables selection with navigation keys. _Automatically turns off after 10 seconds of inactivity._
+- **Visual Mode**: Toggle with CapsLock + v. Enables selection with navigation keys. _Automatically turns off after ~15 minutes of inactivity._
 - **Navigation**:
   - CapsLock + j/l/i/k: Move Left/Right/Up/Down (with selection in Visual Mode)
   - CapsLock + f + i/k: Move 5 steps Up/Down (with selection in Visual Mode)
@@ -79,42 +79,42 @@ Supercharge your CapsLock: lightning-fast navigation, selection, and app switchi
 
 ### Colemak
 
-| Key Combo                        | Action                        |
-| --------------------------------- | ----------------------------- |
-| CapsLock                         | Backspace                     |
-| CapsLock + v                     | Toggle Visual Mode            |
-| CapsLock + n/i/u/e               | Left/Right/Up/Down            |
-| CapsLock + t + u/e               | Move 5 steps Up/Down          |
-| Shift + CapsLock + n/i/u/e       | Scroll Left/Right/Up/Down     |
-| CapsLock + y/l                   | Next/Previous Word            |
-| CapsLock + h/o                   | Home/End                      |
-| CapsLock + hh/oo                 | Ctrl+Home/Ctrl+End            |
-| CapsLock + j/k                   | Page Up/Page Down             |
-| CapsLock + m                     | Ctrl+Backspace (delete word)  |
-| Ctrl + CapsLock                  | Ctrl+Backspace (delete word)  |
-| CapsLock + q/w/f/a/r/s/x         | Types 4/5/6/7/8/9/0           |
-| CapsLock + Space                 | Enter                         |
-| CapsLock + <                     | Go Back (Alt+Left)            |
-| CapsLock + >                     | Go Forward (Alt+Right)        |
-| RAlt + [a–z]                     | Cycle apps by letter/priority |
+| Key Combo                  | Action                        |
+| -------------------------- | ----------------------------- |
+| CapsLock                   | Backspace                     |
+| CapsLock + v               | Toggle Visual Mode            |
+| CapsLock + n/i/u/e         | Left/Right/Up/Down            |
+| CapsLock + t + u/e         | Move 5 steps Up/Down          |
+| Shift + CapsLock + n/i/u/e | Scroll Left/Right/Up/Down     |
+| CapsLock + y/l             | Next/Previous Word            |
+| CapsLock + h/o             | Home/End                      |
+| CapsLock + hh/oo           | Ctrl+Home/Ctrl+End            |
+| CapsLock + j/k             | Page Up/Page Down             |
+| CapsLock + m               | Ctrl+Backspace (delete word)  |
+| Ctrl + CapsLock            | Ctrl+Backspace (delete word)  |
+| CapsLock + q/w/f/a/r/s/x   | Types 4/5/6/7/8/9/0           |
+| CapsLock + Space           | Enter                         |
+| CapsLock + <               | Go Back (Alt+Left)            |
+| CapsLock + >               | Go Forward (Alt+Right)        |
+| RAlt + [a–z]               | Cycle apps by letter/priority |
 
 ### QWERTY
 
-| Key Combo                        | Action                        |
-| --------------------------------- | ----------------------------- |
-| CapsLock                         | Backspace                     |
-| CapsLock + v                     | Toggle Visual Mode            |
-| CapsLock + j/l/i/k               | Left/Right/Up/Down            |
-| CapsLock + f + i/k               | Move 5 steps Up/Down|
-| Shift + CapsLock + j/l/i/k       | Scroll Left/Right/Up/Down     |
-| CapsLock + o/u                   | Next/Previous Word            |
-| CapsLock + h/;                   | Home/End                      |
-| CapsLock + hh/;;                 | Ctrl+Home/Ctrl+End            |
-| CapsLock + p/n                   | Page Up/Page Down             |
-| CapsLock + m                     | Ctrl+Backspace (delete word)  |
-| Ctrl + CapsLock                  | Ctrl+Backspace (delete word)  |
-| CapsLock + q/w/e/a/s/d/x         | Types 4/5/6/7/8/9/0           |
-| CapsLock + Space                 | Enter                         |
-| CapsLock + ,                     | Go Back (Alt+Left)            |
-| CapsLock + .                     | Go Forward (Alt+Right)        |
-| RAlt + [a–z]                     | Cycle apps by letter/priority |
+| Key Combo                  | Action                        |
+| -------------------------- | ----------------------------- |
+| CapsLock                   | Backspace                     |
+| CapsLock + v               | Toggle Visual Mode            |
+| CapsLock + j/l/i/k         | Left/Right/Up/Down            |
+| CapsLock + f + i/k         | Move 5 steps Up/Down          |
+| Shift + CapsLock + j/l/i/k | Scroll Left/Right/Up/Down     |
+| CapsLock + o/u             | Next/Previous Word            |
+| CapsLock + h/;             | Home/End                      |
+| CapsLock + hh/;;           | Ctrl+Home/Ctrl+End            |
+| CapsLock + p/n             | Page Up/Page Down             |
+| CapsLock + m               | Ctrl+Backspace (delete word)  |
+| Ctrl + CapsLock            | Ctrl+Backspace (delete word)  |
+| CapsLock + q/w/e/a/s/d/x   | Types 4/5/6/7/8/9/0           |
+| CapsLock + Space           | Enter                         |
+| CapsLock + ,               | Go Back (Alt+Left)            |
+| CapsLock + .               | Go Forward (Alt+Right)        |
+| RAlt + [a–z]               | Cycle apps by letter/priority |
