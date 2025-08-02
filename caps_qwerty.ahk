@@ -12,18 +12,20 @@ global lastKey := ""
 global visualMode := false
 global keyBuffer := ""
 global bufferTimer := 0
+global capsFHeld := false   ; Tracks if CapsLock+f is held
 
 CapsLock::
 {
     ErrorLevel := 0
     KeyWait("CapsLock", "T0.1")
     if !ErrorLevel {
+        TurnOffVisualMode()
         Send("{Backspace}")
     }
 }
 return
 
-; Toggle Visual Mode with CapsLock + v (auto-off after 10s)
+; Toggle Visual Mode with CapsLock + v (auto-off after 1000000ms, matches Colemak)
 CapsLock & v:: {
     global visualMode
     visualMode := !visualMode
@@ -31,14 +33,14 @@ CapsLock & v:: {
     SetTimer(() => ToolTip(), -1000) ; Hide tooltip after 1 second
 
     if (visualMode) {
-        SetTimer(TurnOffVisualMode, -10000) ; Turn off after 10 seconds
+        SetTimer(TurnOffVisualMode, -1000000) ; Turn off after 1000000ms (effectively disables auto-off)
     }
 }
 
 TurnOffVisualMode() {
     global visualMode
     visualMode := false
-    ToolTip("Visual Mode OFF")
+    ToolTip("Visual Mode auto OFF")
     SetTimer(() => ToolTip(), -1000)
 }
 
@@ -53,12 +55,38 @@ CapsLock & l:: {
     Send(visualMode ? "+{Right}" : "{Right}")
 }
 CapsLock & i:: {
-    global visualMode
-    Send(visualMode ? "+{Up}" : "{Up}")
+    global visualMode, capsFHeld
+    if capsFHeld {
+        Move5("Up", visualMode)
+    } else {
+        Send(visualMode ? "+{Up}" : "{Up}")
+    }
 }
 CapsLock & k:: {
-    global visualMode
-    Send(visualMode ? "+{Down}" : "{Down}")
+    global visualMode, capsFHeld
+    if capsFHeld {
+        Move5("Down", visualMode)
+    } else {
+        Send(visualMode ? "+{Down}" : "{Down}")
+    }
+}
+
+; Track CapsLock+f state for 5-step navigation
+CapsLock & f:: {
+    global capsFHeld
+    capsFHeld := true
+    KeyWait("f")
+    capsFHeld := false
+}
+
+Move5(key, visualMode) {
+    Send(visualMode ? "+{" key " 5}" : "{" key " 5}")
+}
+
+; Copy and turn off visual mode (parity with Colemak)
+CapsLock & c:: {
+    TurnOffVisualMode()
+    Send("^c")
 }
 
 #HotIf GetKeyState("Shift")

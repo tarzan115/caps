@@ -6,13 +6,14 @@ global appCycle := Map()
 global lastKey := ""
 global visualMode := false
 global keyBuffer := ""
-global bufferTimer := 0
+global capsTHeld := false   ; Tracks if CapsLock+t is held
 
 CapsLock::
 {
     ErrorLevel := 0 ;
     KeyWait("CapsLock", "T0.1") ; Wait for up to 100ms to check if CapsLock is held
     if !ErrorLevel { ; If released
+        TurnOffVisualMode()
         Send("{Backspace}") ; Send Backspace when clicked
     }
 }
@@ -26,18 +27,32 @@ CapsLock & v:: {
     SetTimer(() => ToolTip(), -1000) ; Hide tooltip after 1 second
 
     if (visualMode) {
-        SetTimer(TurnOffVisualMode, -10000) ; Turn off after 10 seconds
+        SetTimer(TurnOffVisualMode, -1000000)
     }
+}
+
+; Copy and turn off visual mode
+CapsLock & c:: {
+    TurnOffVisualMode()
+    Send("^c")
 }
 
 TurnOffVisualMode() {
     global visualMode
     visualMode := false
-    ToolTip("Visual Mode OFF")
+    ToolTip("Visual Mode auto OFF")
     SetTimer(() => ToolTip(), -1000)
 }
 
-; Navigation keys with optional Shift for selection
+; Track CapsLock+t state
+CapsLock & t:: {
+    global capsTHeld
+    capsTHeld := true
+    KeyWait("t")
+    capsTHeld := false
+}
+
+; Navigation: 1 step normally, 5 steps if CapsLock+t held
 CapsLock & n:: {
     global visualMode
     Send(visualMode ? "+{Left}" : "{Left}")
@@ -47,19 +62,40 @@ CapsLock & i:: {
     Send(visualMode ? "+{Right}" : "{Right}")
 }
 CapsLock & u:: {
-    global visualMode
-    Send(visualMode ? "+{Up}" : "{Up}")
+    global visualMode, capsTHeld
+    if capsTHeld {
+        Move5("Up", visualMode)
+    } else {
+        Send(visualMode ? "+{Up}" : "{Up}")
+    }
 }
 CapsLock & e:: {
-    global visualMode
-    Send(visualMode ? "+{Down}" : "{Down}")
+    global visualMode, capsTHeld
+    if capsTHeld {
+        Move5("Down", visualMode)
+    } else {
+        Send(visualMode ? "+{Down}" : "{Down}")
+    }
 }
 
+Move5(key, visualMode) {
+    Send(visualMode ? "+{" key " 5}" : "{" key " 5}")
+}
+
+; Scroll mouse
 #HotIf GetKeyState("Shift") ;start of context sensitive hotkeys
 CapsLock & n:: Send("{WheelLeft}")      ; Scroll left
 CapsLock & i:: Send("{WheelRight}")     ; Scroll right
 CapsLock & u:: Send("{WheelUp}")        ; Scroll up
 CapsLock & e:: Send("{WheelDown}")      ; Scroll down
+#HotIf ;end of context sensitive hotkeys
+
+; LAlt
+#HotIf GetKeyState("LAlt") ;start of context sensitive hotkeys
+CapsLock & n:: Send("!{Left}")      ; Alt left
+CapsLock & i:: Send("!{Right}")     ; Alt right
+CapsLock & u:: Send("!{Up}")        ; Alt up
+CapsLock & e:: Send("!{Down}")      ; Alt down
 #HotIf ;end of context sensitive hotkeys
 
 ; Next and previous word functionality with Visual Mode
@@ -86,7 +122,7 @@ CapsLock & o:: {
 }
 
 HandleSequence(key) {
-    global keyBuffer, bufferTimer
+    global keyBuffer
     keyBuffer .= key
     SetTimer(ClearBuffer, -500) ; Clear buffer after 500ms
 
