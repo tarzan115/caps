@@ -36,7 +36,7 @@
 
   ;; --- Visual Mode (Selection) ---
   enter_vis (layer-switch visual)
-  exit_vis (layer-switch colemak)
+  bspc_n_exit_vis (multi (layer-switch colemak) bspc)
   copy_exit_vis (multi (layer-switch colemak) C-c)
   paste_exit_vis (multi (layer-switch colemak) C-v)
 
@@ -79,7 +79,7 @@
 (deflayer visual
   _    _    _    _    _           _         _               _        _      _        _              _ _ _
   _    4    5    6    _           _         _               S-C-left S-up   S-C-rght _              _ _ _
-  @exit_vis    7    8    9    _           @del-word @vis-home-dance S-left   S-down S-rght   @vis-end-dance _ _
+  @bspc_n_exit_vis    7    8    9    _           @del-word @vis-home-dance S-left   S-down S-rght   @vis-end-dance _ _
   _    _    0    @copy_exit_vis   @paste_exit_vis _         _               _        _      _        _              _
   _    _    _         ret                   _               _        _
 )
