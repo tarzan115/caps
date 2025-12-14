@@ -51,6 +51,9 @@
 
   ;; --- Other Actions ---
   del-word C-bspc
+  end-semicolon (multi end ;)
+  end-curly-bracket (multi end S-{)
+  cret C-ret
 )
 
 ;; -------------------------------------------------------------------
@@ -60,7 +63,7 @@
 ;; Base Layer: Colemak
 (deflayer colemak
   `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
+  tab  q    w    f    p    g    j    l    u    y    @end-semicolon    [    ]    \
   @nav a    r    s    t    d    h    n    e    i    o    '    ret
   lsft z    x    c    v    b    k    m    ,    .    /    rsft
   lctl lmet lalt      spc            ralt rmet rctl
@@ -69,7 +72,7 @@
 ;; Navigation Layer (CapsLock Held)
 (deflayer navigation
   _    _    _    _    _           _         _           _      _    _      _          _ _ _
-  _    4    5    6    _           _         _           C-left up   C-rght _          _ _ _
+  _    4    5    6    _           _         _           C-left up   C-rght _          @end-curly-bracket _ _
   _    7    8    9    @fast_nav   @del-word @home-dance left   down rght   @end-dance _ _
   _    _    0    C-c  @enter_vis _         _           _      _    _      _          _
   _    _    _         ret                   _           _      _
@@ -90,5 +93,5 @@
   _ _ _ _ _ _ _ _ (macro up up up up up)           _ _ _ _ _
   _ _ _ _ _ _ _ _ (macro down down down down down) _ _ _ _
   _ _ _ _ _ _ _ _ _                                _ _ _
-  _ _ _                 spc                      _ _ _
+  _ _ _                 @cret                      _ _ _
 )
