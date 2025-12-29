@@ -36,6 +36,7 @@
 
   ;; --- Visual Mode (Selection) ---
   enter_vis (layer-switch visual)
+  exit_vis (layer-switch colemak)
   bspc_n_exit_vis (multi (layer-switch colemak) bspc)
   copy_exit_vis (multi (layer-switch colemak) C-c)
   paste_exit_vis (multi (layer-switch colemak) C-v)
@@ -63,7 +64,7 @@
 ;; Base Layer: Colemak
 (deflayer colemak
   `    1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    f    p    g    j    l    u    y    @end-semicolon    [    ]    \
+  tab  q    w    f    p    g    j    l    u    y    ;    [    ]    \
   @nav a    r    s    t    d    h    n    e    i    o    '    ret
   lsft z    x    c    v    b    k    m    ,    .    /    rsft
   lctl lmet lalt      spc            ralt rmet rctl
@@ -71,20 +72,20 @@
 
 ;; Navigation Layer (CapsLock Held)
 (deflayer navigation
-  _    _    _    _    _           _         _           _      _    _      _          _ _ _
-  _    4    5    6    _           _         _           C-left up   C-rght _          @end-curly-bracket _ _
-  _    7    8    9    @fast_nav   @del-word @home-dance left   down rght   @end-dance _ _
-  _    _    0    C-c  @enter_vis _         _           _      _    _      _          _
-  _    _    _         ret                   _           _      _
+  _ _ _ _   _          _         _           _      _    _      _              _                  _ _
+  _ 4 5 6   _          _         _           C-left up   C-rght @end-semicolon @end-curly-bracket _ _
+  _ 7 8 9   @fast_nav  @del-word @home-dance left   down rght   @end-dance     _                  _
+  _ _ 0 C-c @enter_vis _         _           _      _    _      _              _
+  _ _ _     ret                  _           _      _
 )
 
 ;; Visual Mode Layer (Selection Mode)
 (deflayer visual
-  _    _    _    _    _           _         _               _        _      _        _              _ _ _
-  _    4    5    6    _           _         _               S-C-left S-up   S-C-rght _              _ _ _
-  @bspc_n_exit_vis    7    8    9    _           @del-word @vis-home-dance S-left   S-down S-rght   @vis-end-dance _ _
-  _    _    0    @copy_exit_vis   @paste_exit_vis _         _               _        _      _        _              _
-  _    _    _         ret                   _               _        _
+  @exit_vis        _ _ _              _               _         _               _        _      _        _              _ _ _
+  _                4 5 6              _               _         _               S-C-left S-up   S-C-rght _              _ _ _
+  @bspc_n_exit_vis 7 8 9              _               @del-word @vis-home-dance S-left   S-down S-rght   @vis-end-dance _ _
+  _                _ 0 @copy_exit_vis @paste_exit_vis _         _               _        _      _        _              _
+  _                _ _                ret                       _               _        _
 )
 
 ;; Fast Navigation Sub-Layers (while 't' is held)
